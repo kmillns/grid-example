@@ -1,1 +1,19 @@
-{{yield}}
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Device</th>
+            <th>Path</th>
+            <th>Status</th>
+        </tr>
+
+        {{#each @content as |file|}}
+        <tr>
+            <td>{{file.name}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
