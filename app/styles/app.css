@@ -1,1 +1,30 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+.data-grid__table {
+}
+
+.data-grid__body {
+}
+
+.data-grid__header-row {
+}
+
+.data-grid__header-cell {
+}
+
+.data-grid__header-row {
+}
+
+.data-grid__cell {
+}
+
+.file-status__available-icon {
+  color: green;
+  max-height: 1em;
+}

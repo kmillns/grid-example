@@ -1,19 +1,34 @@
-<table>
-    <tbody>
-        <tr>
-            <th>Name</th>
-            <th>Device</th>
-            <th>Path</th>
-            <th>Status</th>
-        </tr>
+<div>
+    <div class="data-grid__header">
+        <div class="data-grid__select-all">
+            <Input
+                @type="checkbox"
+                @checked={{this.allSelected}}
+                indeterminate={{this.isIndeterminateSelected}}
+            />
+        </div>
+        <div>{{this.selectedCount}} Selected</div>
+        <div>
+            <button type="button">Download Selected</button>
+        </div>
+    </div>
+    <table class="data-grid__table">
+        <tbody class="data-grid__body">
+            <tr class="data-grid__header-row">
+                {{!-- 
+                    Note: "Selected" being labeled is a deviation from design specs
+                    but is an accessibility best practice https://dequeuniversity.com/rules/axe/4.5/empty-table-header
+                --}}
+                <th class="data-grid__header-cell">Selected</th>
+                <th class="data-grid__header-cell">Name</th>
+                <th class="data-grid__header-cell">Device</th>
+                <th class="data-grid__header-cell">Path</th>
+                <th class="data-grid__header-cell">Status</th>
+            </tr>
 
-        {{#each @content as |file|}}
-        <tr>
-            <td>{{file.name}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+            {{#each @content as |file|}}
+                <GridRow @selectedFileIds={{this.selectedFileIds}} @selectFile={{this.selectFile}} @file={{file}} />
+            {{/each}}
+        </tbody>
+    </table>
+</div>

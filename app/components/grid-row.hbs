@@ -1,0 +1,14 @@
+<tr class="data-grid__header-row">
+    <td class="data-grid__cell">
+        <Input
+            @type="checkbox"
+            @checked={{this.selected}}
+        />
+    </td>
+    <td class="data-grid__cell">{{@file.name}}</td>
+    <td class="data-grid__cell">{{@file.device}}</td>
+    <td class="data-grid__cell">{{@file.path}}</td>
+    <td class="data-grid__cell">
+        <FileStatus @currentStatus={{@file.status}} />
+    </td>
+</tr>
