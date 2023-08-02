@@ -1,32 +1,47 @@
-<div>
+<div class="data-grid">
     <div class="data-grid__summary">
-        <div>{{this.selectedCount}} Selected</div>
+        <div aria-live="polite">{{this.selectedCount}} Selected</div>
         <div>
-            <button class="button--primary" type="button" {{on "click" (fn this.downloadFiles)}}>Download Selected</button>
+            <button class="button--primary" type="button" {{on "click" this.downloadFiles}}>
+                <span>
+                    {{!-- download icon from bootstrap: https://icons.getbootstrap.com/icons/download/ --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="button__download-icon" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                    </svg>
+                </span>
+                Download Selected
+            </button>
         </div>
     </div>
-    <table class="data-grid__table" role="grid">
-        <thead class="data-grid__header">
-            <tr class="data-grid__header-row">
-                <th class="data-grid__header-cell">
-                    <div class="data-grid__select-all">
-                        <Input
-                            @type="checkbox"
-                            @checked={{this.allSelected}}
-                            indeterminate={{this.isIndeterminateSelected}}
-                        />
-                    </div>
-                </th>
-                <th class="data-grid__header-cell">Name</th>
-                <th class="data-grid__header-cell">Device</th>
-                <th class="data-grid__header-cell">Path</th>
-                <th class="data-grid__header-cell">Status</th>
-            </tr>
-        </thead>
-        <tbody class="data-grid__body">
-            {{#each @content as |file|}}
-                <GridRow @selectedFileIds={{this.selectedFileIds}} @selectFile={{this.selectFile}} @file={{file}} />
-            {{/each}}
-        </tbody>
-    </table>
+    <div class="data-grid__table-wrapper">
+        <table class="data-grid__table">
+            <thead class="data-grid__header">
+                <tr class="data-grid__header-row">
+                    <th class="data-grid__header-cell">
+                        <div class="data-grid__select-all">
+                            <Input
+                                class="data-grid__checkbox"
+                                @type="checkbox"
+                                @checked={{this.allSelected}}
+                                indeterminate={{this.isIndeterminateSelected}}
+                                aria-label={{if this.allSelected "Deselect all rows" "Select all rows"}}
+                            />
+                        </div>
+                    </th>
+                    <th class="data-grid__header-cell">Name</th>
+                    <th class="data-grid__header-cell">Device</th>
+                    <th class="data-grid__header-cell">Path</th>
+                    <th class="data-grid__header-cell">
+                        <span class="data-grid__header-status">Status</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="data-grid__body">
+                {{#each @content as |file|}}
+                    <GridRow @selectedFileIds={{this.selectedFileIds}} @selectFile={{this.selectFile}} @file={{file}} />
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </div>

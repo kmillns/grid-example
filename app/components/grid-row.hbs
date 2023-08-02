@@ -1,8 +1,10 @@
 <tr class="data-grid__body-row {{if this.selected "data-grid__body-row--selected"}}">
     <td class="data-grid__cell">
         <Input
+            class="data-grid__checkbox"
             @type="checkbox"
             @checked={{this.selected}}
+            aria-label="Select row"
         />
     </td>
     <td class="data-grid__cell">{{@file.name}}</td>

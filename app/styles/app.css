@@ -7,26 +7,64 @@
 }
 
 body {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+}
+
+.button--primary {
+  background: #fff;
+  font-size: 20px;
+  border: 1px solid #777;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.button--primary:focus,
+.button--primary:hover {
+  background: #eee;
+}
+
+.button__download-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: -3px; /* slight hack to align icon with text baseline */
 }
 
 .data-grid__summary {
   display: flex;
   gap: 1em;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.data-grid__table-wrapper {
+  border: 1px solid #777;
+  border-radius: 4px;
 }
 
 .data-grid__table {
-  border: 1px solid #777;
-  border-radius: 4px;
+  width: 100%;
   border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.data-grid__checkbox {
+  width: 20px;
+  height: 20px;
+  padding: 15px;
 }
 
 .data-grid__header-row {
-  font-weight: 600;
 }
 
 .data-grid__header-cell {
   text-align: start;
+  font-weight: 600;
+  padding: 20px;
+}
+
+.data-grid__header-status {
+  margin-left: 30px;
 }
 
 .data-grid__header-row {
@@ -36,25 +74,30 @@ body {
 .data-grid__body {
 }
 
-.data-grid__body-row {
+.data-grid__body-row:not(:last-child) {
   border-bottom: 1px solid #777;
 }
 
 .data-grid__body-row--selected {
-  background: #ddd
+  background: #ddd;
 }
 
-.data-grid__body-row:hover,
-.data-grid__body-row:focus {
-  background: #eee
+.data-grid__body-row:hover {
+  background: #eee;
 }
 
 .data-grid__cell {
+  padding: 10px 20px;
+  font-weight: 200;
 }
 
 .file-status {
   display: flex;
-  gap: 1em;
+  gap: 10px;
+}
+
+.file-status__icon-wrapper {
+  width: 20px;
 }
 
 .file-status__available-icon {
