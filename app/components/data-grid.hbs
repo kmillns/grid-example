@@ -1,31 +1,29 @@
 <div>
-    <div class="data-grid__header">
-        <div class="data-grid__select-all">
-            <Input
-                @type="checkbox"
-                @checked={{this.allSelected}}
-                indeterminate={{this.isIndeterminateSelected}}
-            />
-        </div>
+    <div class="data-grid__summary">
         <div>{{this.selectedCount}} Selected</div>
         <div>
-            <button type="button">Download Selected</button>
+            <button class="button--primary" type="button" {{on "click" (fn this.downloadFiles)}}>Download Selected</button>
         </div>
     </div>
-    <table class="data-grid__table">
-        <tbody class="data-grid__body">
+    <table class="data-grid__table" role="grid">
+        <thead class="data-grid__header">
             <tr class="data-grid__header-row">
-                {{!-- 
-                    Note: "Selected" being labeled is a deviation from design specs
-                    but is an accessibility best practice https://dequeuniversity.com/rules/axe/4.5/empty-table-header
-                --}}
-                <th class="data-grid__header-cell">Selected</th>
+                <th class="data-grid__header-cell">
+                    <div class="data-grid__select-all">
+                        <Input
+                            @type="checkbox"
+                            @checked={{this.allSelected}}
+                            indeterminate={{this.isIndeterminateSelected}}
+                        />
+                    </div>
+                </th>
                 <th class="data-grid__header-cell">Name</th>
                 <th class="data-grid__header-cell">Device</th>
                 <th class="data-grid__header-cell">Path</th>
                 <th class="data-grid__header-cell">Status</th>
             </tr>
-
+        </thead>
+        <tbody class="data-grid__body">
             {{#each @content as |file|}}
                 <GridRow @selectedFileIds={{this.selectedFileIds}} @selectFile={{this.selectFile}} @file={{file}} />
             {{/each}}

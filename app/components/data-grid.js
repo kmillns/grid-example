@@ -31,6 +31,8 @@ export default class DataGrid extends Component {
         }
     }
 
+    // "indeterminate" has to be set separately from "checked" so we have to calculate
+    // both allSelected and isIndeterminateSelected
     get isIndeterminateSelected() {
         return (
             this.selectedFileIds.size > 0 &&
@@ -48,5 +50,18 @@ export default class DataGrid extends Component {
 
         // todo: track this more cleanly to not require overwrites
         this.selectedFileIds = this.selectedFileIds;
+    }
+
+    @action
+    downloadFiles() {
+        let selectedFiles = this.args.content.filter(file => {
+            return this.selectedFileIds.has(file.id) && file.status === 'available';
+        });
+
+        let output = selectedFiles.map(file => {
+            return `device: ${file.device}, path: ${file.path}`;
+        }).join('\n');
+
+        alert(output);
     }
 }
