@@ -7,13 +7,13 @@ module('Integration | Component | button-download', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    const testClick = () => {
-
-    };
+    const testClick = () => {};
 
     this.set('testClick', testClick);
 
-    await render(hbs`<ButtonDownload @onClick={{this.testClick}}>Test Button</ButtonDownload>`);
+    await render(
+      hbs`<ButtonDownload @onClick={{this.testClick}}>Test Button</ButtonDownload>`
+    );
 
     assert.dom('[data-test-button-download]').hasClass('button--primary');
   });
@@ -27,7 +27,9 @@ module('Integration | Component | button-download', function (hooks) {
 
     this.set('testClick', testClick);
 
-    await render(hbs`<ButtonDownload @onClick={{this.testClick}}>Test Button</ButtonDownload>`);
+    await render(
+      hbs`<ButtonDownload @onClick={{this.testClick}}>Test Button</ButtonDownload>`
+    );
 
     await click('[data-test-button-download]');
   });
