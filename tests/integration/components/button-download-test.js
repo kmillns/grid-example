@@ -1,26 +1,34 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'grid-example/tests/helpers';
-import { render } from '@ember/test-helpers';
+import { click, render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | button-download', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    const testClick = () => {
 
-    await render(hbs`<ButtonDownload />`);
+    };
 
-    assert.dom(this.element).hasText('');
+    this.set('testClick', testClick);
 
-    // Template block usage:
-    await render(hbs`
-      <ButtonDownload>
-        template block text
-      </ButtonDownload>
-    `);
+    await render(hbs`<ButtonDownload @onClick={{this.testClick}}>Test Button</ButtonDownload>`);
 
-    assert.dom(this.element).hasText('template block text');
+    assert.dom('[data-test-button-download]').hasClass('button--primary');
+  });
+
+  test('on click it calls onClick', async function (assert) {
+    assert.expect(1, 'one call in onClick should have been asserted');
+
+    const testClick = () => {
+      assert.ok(true, 'onClick is called');
+    };
+
+    this.set('testClick', testClick);
+
+    await render(hbs`<ButtonDownload @onClick={{this.testClick}}>Test Button</ButtonDownload>`);
+
+    await click('[data-test-button-download]');
   });
 });

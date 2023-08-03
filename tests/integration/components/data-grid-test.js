@@ -419,4 +419,88 @@ module('Integration | Component | data-grid', function (hooks) {
 
     assert.dom('[data-test-selected-count]').hasText('0');
   });
+
+  test('download click calls alert', async function (assert) {
+    const data = [
+      {
+        id: 0,
+        name: 'name 1',
+        device: 'device 1',
+        path: 'path 1',
+        status: 'scheduled',
+      },
+      {
+        id: 1,
+        name: 'name 2',
+        device: 'device 2',
+        path: 'path 2',
+        status: 'available',
+      },
+      {
+        id: 2,
+        name: 'name 3',
+        device: 'device 3',
+        path: 'path 3',
+        status: 'scheduled',
+      },
+    ];
+
+    this.set('data', data);
+
+    await render(hbs`<DataGrid @content={{this.data}} />`);
+
+    const oldAlert = window.alert;
+
+    assert.expect(1, 'one call in alert should have been asserted');
+    window.alert = () => {
+      assert.ok(true, 'alert is called');
+    };
+
+    await click('[data-test-button-download]');
+
+    window.alert = oldAlert;
+  });
+
+  test('download click calls alert with only available file info even when all are selected', async function (assert) {
+    const data = [
+      {
+        id: 0,
+        name: 'name 1',
+        device: 'device 1',
+        path: 'path 1',
+        status: 'scheduled',
+      },
+      {
+        id: 1,
+        name: 'name 2',
+        device: 'device 2',
+        path: 'path 2',
+        status: 'available',
+      },
+      {
+        id: 2,
+        name: 'name 3',
+        device: 'device 3',
+        path: 'path 3',
+        status: 'scheduled',
+      },
+    ];
+
+    this.set('data', data);
+
+    await render(hbs`<DataGrid @content={{this.data}} />`);
+
+    const oldAlert = window.alert;
+
+    assert.expect(1, 'one call in alert should have been asserted');
+    window.alert = (input) => {
+      assert.equal(input, 'device: device 2, path: path 2');
+    };
+
+    await click('[data-test-grid-select-all]');
+
+    await click('[data-test-button-download]');
+
+    window.alert = oldAlert;
+  });
 });
