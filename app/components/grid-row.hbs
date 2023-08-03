@@ -1,6 +1,7 @@
-<tr class="data-grid__body-row {{if this.selected "data-grid__body-row--selected"}}">
+<tr class="data-grid__body-row {{if this.selected "data-grid__body-row--selected"}}" data-test-grid-row>
     <td class="data-grid__cell">
         <Input
+            data-test-grid-row-checkbox
             class="data-grid__checkbox"
             @type="checkbox"
             @checked={{this.selected}}

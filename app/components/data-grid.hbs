@@ -1,6 +1,6 @@
-<div class="data-grid">
+<div class="data-grid" data-test-grid>
     <div class="data-grid__summary">
-        <div aria-live="polite">{{this.selectedCount}} Selected</div>
+        <div aria-live="polite">Selected <span data-test-selected-count>{{this.selectedCount}}</span></div>
         <div>
             <button class="button--primary" type="button" {{on "click" this.downloadFiles}}>
                 <span>
@@ -15,12 +15,14 @@
         </div>
     </div>
     <div class="data-grid__table-wrapper">
-        <table class="data-grid__table">
+        <table class="data-grid__table" data-test-grid-table>
             <thead class="data-grid__header">
                 <tr class="data-grid__header-row">
                     <th class="data-grid__header-cell">
                         <div class="data-grid__select-all">
+                            {{!-- Note: select all control inside grid for accessibility and labeling, this differs from design spec --}}
                             <Input
+                                data-test-grid-select-all
                                 class="data-grid__checkbox"
                                 @type="checkbox"
                                 @checked={{this.allSelected}}
@@ -37,7 +39,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody class="data-grid__body">
+            <tbody class="data-grid__body" data-test-grid-table-body>
                 {{#each @content as |file|}}
                     <GridRow @selectedFileIds={{this.selectedFileIds}} @selectFile={{this.selectFile}} @file={{file}} />
                 {{/each}}

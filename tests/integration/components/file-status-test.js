@@ -7,20 +7,44 @@ module('Integration | Component | file-status', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    this.set('status', 'scheduled');
+    await render(hbs`<FileStatus @currentStatus={{this.status}} />`);
 
-    await render(hbs`<FileStatus />`);
+    assert.dom('[data-test-file-status]').hasClass('file-status');
+  });
 
-    assert.dom(this.element).hasText('');
+  test('available status icon is not rendered when status is scheduled', async function (assert) {
+    this.set('status', 'scheduled');
+    await render(hbs`<FileStatus @currentStatus={{this.status}} />`);
 
-    // Template block usage:
-    await render(hbs`
-      <FileStatus>
-        template block text
-      </FileStatus>
-    `);
+    assert.dom('[data-test-file-status-icon]').doesNotExist();
+  });
 
-    assert.dom(this.element).hasText('template block text');
+  test('available status icon is rendered when status is available', async function (assert) {
+    this.set('status', 'available');
+    await render(hbs`<FileStatus @currentStatus={{this.status}} />`);
+
+    assert.dom('[data-test-file-status-icon]').exists();
+  });
+
+  test('status is correctly title cased when starting in all lower case', async function (assert) {
+    this.set('status', 'available');
+    await render(hbs`<FileStatus @currentStatus={{this.status}} />`);
+
+    assert.dom('[datat-test-file-status-name]').hasText('Available');
+  });
+
+  test('status is correctly title cased when starting in all upper case', async function (assert) {
+    this.set('status', 'SCHEDULED');
+    await render(hbs`<FileStatus @currentStatus={{this.status}} />`);
+
+    assert.dom('[datat-test-file-status-name]').hasText('Scheduled');
+  });
+
+  test('status is correctly title cased when starting in mixed case', async function (assert) {
+    this.set('status', 'mIxEdCaSe');
+    await render(hbs`<FileStatus @currentStatus={{this.status}} />`);
+
+    assert.dom('[datat-test-file-status-name]').hasText('Mixedcase');
   });
 });
