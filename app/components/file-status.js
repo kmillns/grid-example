@@ -10,7 +10,8 @@ export default class FileStatus extends Component {
     const lowerCaseStatus = this.args.currentStatus.toLocaleLowerCase();
 
     // then capitalize just the first character
-    const titleCaseStatus = lowerCaseStatus[0].toLocaleUpperCase() + lowerCaseStatus.slice(1);
+    const titleCaseStatus =
+      lowerCaseStatus[0].toLocaleUpperCase() + lowerCaseStatus.slice(1);
 
     return titleCaseStatus;
   }
