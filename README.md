@@ -22,6 +22,7 @@ There are several things that would make this component more reusuable, more fea
 * Address lint issues and configure CSS linting rules.
 * Introduce ember-cli-mirage for serving fake data to make the calls more realistic to actual server calls.
 * Abstract the call into window.alert for downloads into an download or alert service that could be reused and tested separately.
+* Depending on desired behavior, disable either the "Download Selected" button when the only items selected are not available or disable the selection of rows that are not in available status.  Currently the filtering of only downloading available files happens on download, but the grid controls remain enabled.
 
 ## Prerequisites
 
