@@ -37,6 +37,10 @@ body {
   align-items: center;
 }
 
+.data-grid__selected-count {
+  min-width: 120px;
+}
+
 .data-grid__table-wrapper {
   border: 1px solid #777;
   border-radius: 4px;

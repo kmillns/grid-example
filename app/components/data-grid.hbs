@@ -1,6 +1,12 @@
 <div class="data-grid" data-test-grid>
     <div class="data-grid__summary">
-        <div aria-live="polite">Selected <span data-test-selected-count>{{this.selectedCount}}</span></div>
+        <div class="data-grid__selected-count" aria-live="polite" data-test-selected-count>
+            {{#if this.selectedCount}}
+                Selected {{this.selectedCount}}
+            {{else}}
+                None Selected
+            {{/if}}
+        </div>
         <div>
             <ButtonDownload @onClick={{this.downloadFiles}}>Download Selected</ButtonDownload>
         </div>

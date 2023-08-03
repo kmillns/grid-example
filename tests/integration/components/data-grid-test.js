@@ -295,13 +295,13 @@ module('Integration | Component | data-grid', function (hooks) {
       .hasProperty('indeterminate', false);
   });
 
-  test('selected count is 0 when no data is passed in', async function (assert) {
+  test('selected count displays "None Selected" when no data is passed in', async function (assert) {
     await render(hbs`<DataGrid />`);
 
-    assert.dom('[data-test-selected-count]').hasText('0');
+    assert.dom('[data-test-selected-count]').hasText('None Selected');
   });
 
-  test('selected count is 0 with initial data', async function (assert) {
+  test('selected count "None Selected" with initial data', async function (assert) {
     const data = [
       {
         id: 0,
@@ -330,7 +330,7 @@ module('Integration | Component | data-grid', function (hooks) {
 
     await render(hbs`<DataGrid @content={{this.data}} />`);
 
-    assert.dom('[data-test-selected-count]').hasText('0');
+    assert.dom('[data-test-selected-count]').hasText('None Selected');
   });
 
   test('selected count changes to match selected rows', async function (assert) {
@@ -362,22 +362,22 @@ module('Integration | Component | data-grid', function (hooks) {
 
     await render(hbs`<DataGrid @content={{this.data}} />`);
 
-    assert.dom('[data-test-selected-count]').hasText('0');
+    assert.dom('[data-test-selected-count]').hasText('None Selected');
 
     const rowCheckboxes = this.element.querySelectorAll(
       '[data-test-grid-row-checkbox]'
     );
     await click(rowCheckboxes[0]);
 
-    assert.dom('[data-test-selected-count]').hasText('1');
+    assert.dom('[data-test-selected-count]').hasText('Selected 1');
 
     await click(rowCheckboxes[1]);
 
-    assert.dom('[data-test-selected-count]').hasText('2');
+    assert.dom('[data-test-selected-count]').hasText('Selected 2');
 
     await click(rowCheckboxes[0]);
 
-    assert.dom('[data-test-selected-count]').hasText('1');
+    assert.dom('[data-test-selected-count]').hasText('Selected 1');
   });
 
   test('selected count changes bewteen row count and 0 on select all', async function (assert) {
@@ -409,15 +409,15 @@ module('Integration | Component | data-grid', function (hooks) {
 
     await render(hbs`<DataGrid @content={{this.data}} />`);
 
-    assert.dom('[data-test-selected-count]').hasText('0');
+    assert.dom('[data-test-selected-count]').hasText('None Selected');
 
     await click('[data-test-grid-select-all]');
 
-    assert.dom('[data-test-selected-count]').hasText('3');
+    assert.dom('[data-test-selected-count]').hasText('Selected 3');
 
     await click('[data-test-grid-select-all]');
 
-    assert.dom('[data-test-selected-count]').hasText('0');
+    assert.dom('[data-test-selected-count]').hasText('None Selected');
   });
 
   test('download click calls alert', async function (assert) {
